@@ -120,7 +120,7 @@
 
 
 			<!--Sales-->
-			<!-- <section class="boxes" id="Destinations">
+			<section class="boxes" id="Destinations">
 				<div class="container-fluid">
 
 					
@@ -129,7 +129,7 @@
 					<div class="row">
 						
 					
-						<div class="col-md-12 bordered_block grey_border image_bck" ng-repeat="dest in destination" data-image="{{dest.images.url}}">
+						<div class="col-md-12 bordered_block grey_border image_bck" ng-repeat="dest in destination | limitTo : 4" data-image="{{dest.images.url}}">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-6 wow fadeInLeft">
@@ -146,7 +146,7 @@
 					</div>
 
 				</div>
-			</section> -->
+			</section>
 			<!--Sales End-->
 
 			<!--News-->
