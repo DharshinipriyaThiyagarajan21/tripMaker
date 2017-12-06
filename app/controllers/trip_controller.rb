@@ -21,9 +21,16 @@ class TripController < ApplicationController
 		end 
 	end
 
+	# def get_data
+	# 	destination = Destination.where("name LIKE '#{params[:trip][:data]}%'")
+	# 	dest_id = destination.first.id
+	# 	poi = Poi.where(destination_id: dest_id)
+	# 	render json: {'pois': poi}
+	# end
+
 	def get_data
-		destination = Destination.where("name LIKE '#{params[:trip][:data]}%'")
-		dest_id = destination.first.id
+		destination = Destination.find_by_name(params[:trip][:data])
+		dest_id = destination.id
 		poi = Poi.where(destination_id: dest_id)
 		render json: {'pois': poi}
 	end

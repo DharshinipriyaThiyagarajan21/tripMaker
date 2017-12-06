@@ -165,19 +165,19 @@
 										<div class="masonry row">
 											
 											<!--Item-->
-											<div class="col-sm-4 post-snippet masonry-item" ng-repeat="poi in pois">
-												<a href="#">
-													<img alt="" ng-src="{{poi.images.url}}" />
+											<div class="col-sm-4 post-snippet masonry-item" ng-repeat="p in poi">
+												<a href="http://wikipedia.org/wiki/{{p.name}}" target="_blank">
+													<img alt="" ng-src="{{p.images.url}}" />
 												</a>
 												<div class="inner">
-													<a>
-														<h4 class="title">{{poi.name}}</h4>
-														<span class="date">Opening hours : {{poi.open_time | date:'hh:mm a'}} - {{poi.close_time | date:'hh:mm a'}}</span>
+													<a href="http://wikipedia.org/wiki/{{p.name}}" target="_blank">
+														<h4 class="title">{{p.name}}</h4>
+														<span class="date">Opening hours : {{p.open_time | date:'hh:mm a'}} - {{p.close_time | date:'hh:mm a'}}</span>
 													</a>
 													<p>
-														{{poi.description}}
+														{{p.description}}
 													</p>
-													<a class="btn btn-default" href="#">Read More</a>
+													<!-- <a class="btn btn-default" href="#">Read More</a> -->
 												</div>
 											</div>
 
@@ -406,38 +406,104 @@
 		<!-- Page End -->
 
 	</div>
+	<div style="visibility: hidden;">
+		<div class="md-dialog-container" id="bookNow">
+			<md-dialog aria-label="Trip">
+				<form ng-cloak>
+					<md-toolbar>
+						<div class="md-toolbar-tools">
+							<span flex></span>
+							<md-button class="md-icon-button" ng-click="cancel()">
+								<i class="fa fa-close" aria-label="Close dialog"></i>
+							</md-button>
+						</div>
+					</md-toolbar>
+
+					<md-dialog-content>
+						<div class="md-dialog-content">
+							<div ng-cloak>
+								<div class="md-content">
+									<ul class="form-ul">
+										<li>
+											<label>Name</label>
+											<input type="text" class="formControl" ng-model="trip.name" bs-options="user for user in trips.users" bs-typeahead auto-select="1">
+										</li>
+										<li>
+											<label>No. of Days</label>
+											<input type="number" class="formControl" ng-model="trip.day_count">
+										</li>
+										<li>
+											<label>Trip starting date</label>
+											<input type="text" ng-model="trip.starting_date" bs-datepicker class="formControl">
+										</li>
+										<li>
+											<label>Trip ending date</label>
+											<input type="text" ng-model="trip.ending_date" bs-datepicker class="formControl">
+										</li>
+										<li>
+											<label>No.of Passengers</label>
+											<input type="number" class="formControl" ng-model="trip.pax_count">
+										</li>
+										<li>
+											<label>Amount</label>
+											<input type="number" class="formControl" ng-model="trip.amount">
+										</li>
+										<li>
+											<label>Starting place</label>
+											<input type="text" ng-model="trip.starting_place" class="formControl" bs-options="city for city in trips.cities" bs-typeahead auto-select="1">
+										</li>
+										<li>
+											<label>Ending place</label>
+											<input type="text" ng-model="trip.ending_place" class="formControl" bs-options="city for city in trips.cities" bs-typeahead auto-select="1">
+										</li>
+									</ul>
+									<div>
+										<div class="trip-details">
+											<label>Trip iternary</label>
+											<ul ng-repeat="itenary in itenaries track by $index">
+												<li>
+													<input type="text" class="formControl" name="city" ng-model="destValue" placeholder="Enter the city">
+												</li>
+												<li class="multi-select">
+													<select multi-select name="poi" ng-model="itenaries[$index].poi" data-placeholder="Select poi">
+														<option ng-value="poi.name" ng-repeat="poi in pois track by $index">{{poi.name}}</option>
+													</select>
+												</li>
+												<li>
+													<input type="number" class="formControl" name="day" ng-model="itenaries[$index].day" placeholder="No. of days">
+												</li>
+												<li>
+													<i class="fa fa-plus-circle" ng-click="addItenary()" ng-show="trip.day_count > 1"></i>
+													<i class="fa fa-minus-circle" ng-hide="itenaries.length == 1" ng-click="removeItenary($index)"></i>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</md-dialog-content>
+
+					<md-dialog-actions layout="row">
+						<span flex></span>
+						<md-button ng-click="saveTrip()">
+							Save
+						</md-button>
+					</md-dialog-actions>
+					<div ng-show="success != undefined" class="alert alert-success">
+						{{success}}
+					</div>
+				</form>
+			</md-dialog>
+		</div>
+	</div>
 </div>
-<script type="text/ng-template" id="bookNow.tmpl.html">
-	<md-dialog aria-label="Trip">
-		<form ng-cloak>
-			<md-toolbar>
-				<div class="md-toolbar-tools">
-					<span flex></span>
-					<md-button class="md-icon-button" ng-click="cancel()">
-						<i class="fa fa-close" aria-label="Close dialog"></i>
-					</md-button>
-				</div>
-			</md-toolbar>
 
-			<md-dialog-content>
-				<div class="md-dialog-content">
-					
-				</div>
-			</md-dialog-content>
-
-			<md-dialog-actions layout="row">
-				<span flex></span>
-				<md-button ng-click="saveTrip()">
-					Save
-				</md-button>
-			</md-dialog-actions>
-		</form>
-	</md-dialog>
-</script>
 <script type="text/javascript">
 	var json = {
 		'destination' : <%= @destination.to_json.html_safe %>,
-		'pois': <%= @pois.to_json(:include => { :destination => {:only => [:name,:country]}}).html_safe %>
+		'poi': <%= @pois.to_json(:include => { :destination => {:only => [:name,:country]}}).html_safe %>,
+		'trips' : <%= @json.to_json.html_safe %>
 	}
 	console.log(json)
 </script>

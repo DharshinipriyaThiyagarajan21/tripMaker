@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   resources 'trip'
   resources 'poi'
   resources 'destination'
+  resources 'home'
 
 end
