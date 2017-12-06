@@ -1,0 +1,64 @@
+<div class="addNew">
+	<div class="header">
+		<span class="pull-left">
+			<a href="/">TripMaker</a>
+		</span>
+		<span class="pull-right logout">
+			<a href="/users/sign_out">Logout</a>
+		</span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="main-wrapper">
+		<div class="sidenav">
+			<ul>
+				<li><a href="/users">Users</a></li>
+				<li><a href="/destinations">Destinations</a></li>
+				<li><a href="/pois">POI</a></li>
+				<li><a href="/trips">Trips</a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+			<div class="userForm" ng-controller="userController" ng-cloak>
+				<div class="md-content">
+					<div class="text-right">
+						<span><a href="users/new" class="addNew">Add New</a></span>
+					</div>
+					<div class="table-section">
+						<table>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Address</th>
+									<th>City</th>
+									<th>Country</th>
+									<th>Mobile</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="user in users">
+									<td>{{user.name}}</td>
+									<td>{{user.email}}</td>
+									<td>{{user.area}}</td>
+									<td>{{user.city}}</td>
+									<td>{{user.country}}</td>
+									<td>{{user.mobile}}</td>
+								</tr>
+								<tr ng-if="users.length == 0">
+									<td colspan="100" class="text-center border">
+										No data found
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var json = {
+		'users': <%= @users.to_json.html_safe %>
+	}
+</script>

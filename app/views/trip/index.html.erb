@@ -1,0 +1,75 @@
+<div class="addNew">
+	<div class="header">
+		<span class="pull-left">
+			<a href="/">TripMaker</a>
+		</span>
+		<span class="pull-right logout">
+			<a href="/users/sign_out">Logout</a>
+		</span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="main-wrapper">
+		<div class="sidenav">
+			<ul>
+				<li><a href="/users">Users</a></li>
+				<li><a href="/destinations">Destinations</a></li>
+				<li><a href="/pois">POI</a></li>
+				<li><a href="/trips">Trips</a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+			<div class="userForm" ng-controller="tripController" ng-cloak>
+				<div class="md-content">
+					<div class="text-right">
+						<span><a href="trips/new" class="addNew">Add New</a></span>
+					</div>
+					<div class="table-section">
+						<table>
+							<thead>
+								<tr>
+									<th>Customer Name</th>
+									<th>Starting data</th>
+									<th>Ending date</th>
+									<th>Starting place</th>
+									<th>Ending place</th>
+									<th>No.of days</th>
+									<th>Total passengers</th>
+									<th>Amount</th>
+									<th>Trip Details</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="trip in trips">
+									<td>{{trip.user.name}}</td>
+									<td>{{trip.starting_day | date:"dd/MM/yyyy"}}</td>
+									<td>{{trip.ending_day | date:"dd/MM/yyyy" }}</td>
+									<td>{{trip.starting_place}}</td>
+									<td>{{trip.ending_place}}</td>
+									<td class="text-center">{{trip.no_of_days}}</td>
+									<td class="text-center">{{trip.no_of_pax}}</td>
+									<td>{{trip.budget}}</td>
+									<td>
+										<div ng-repeat="td in trip.trip_details">
+											{{td.no_of_days}} day<span ng-if="td.no_of_days > 1">s</span> in {{td.destination}} to visit {{td.pois}}
+										</div>
+									</td>
+								</tr>
+								<tr ng-if="trips.length == 0">
+									<td colspan="100" class="text-center border">
+										No data found
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var json = {
+		'trips': <%= @trips.to_json(:include => [{ :user => {:only => [:name]}},:trip_details]).html_safe %>
+	}
+	console.log(json)
+</script>

@@ -1,0 +1,67 @@
+<div class="addNew">
+	<div class="header">
+		<span class="pull-left">
+			<a href="/">TripMaker</a>
+		</span>
+		<span class="pull-right logout">
+			<a href="/users/sign_out">Logout</a>
+		</span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="main-wrapper">
+		<div class="sidenav">
+			<ul>
+				<li><a href="/users">Users</a></li>
+				<li><a href="/destinations">Destinations</a></li>
+				<li><a href="/pois">POI</a></li>
+				<li><a href="/trips">Trips</a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+			<div ng-controller="userController" ng-cloak>
+				<div class="userForm">
+					<div ng-if="userResponse.error != undefined" class="error-section">
+						<div class="alert alert-danger">{{userResponse.error}}</div>
+					</div>
+					<form id="userForm">
+						<div class="md-content">
+							<ul class="form-ul">
+								<li>
+									<label>Name</label>
+									<input type="text" class="formControl" ng-model="user.name" name="username" required>
+								</li>
+								<li>
+									<label>Email</label>
+									<input type="email" class="formControl" ng-model="user.email" name="email" required>
+								</li>
+								<li>
+									<label>Address</label>
+									<input type="text" class="formControl" ng-model="user.address" name="address" required>
+								</li>
+								<li>
+									<label>City</label>
+									<input type="text" class="formControl" ng-model="user.city" name="city" required>
+								</li>
+								<li>
+									<label>Country</label>
+									<input type="text" class="formControl" ng-model="user.country" name="country" bs-options="country for country in countries" bs-typeahead auto-select="1" required>
+								</li>
+								<li>
+									<label>Mobile</label>
+									<input type="number" class="formControl" name="mobile" ng-model="user.mobile" required>
+								</li>
+							</ul>
+							<div class="text-right">
+								<md-button type="submit" validation-submit="userForm" class="md-raised md-primary" ng-click="saveUser()">Save</md-button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var json = <%= @json.to_json.html_safe %>
+	console.log(json)
+</script>

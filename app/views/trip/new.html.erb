@@ -1,0 +1,92 @@
+<div class="addNew">
+	<div class="header">
+		<span class="pull-left">
+			<a href="/">TripMaker</a>
+		</span>
+		<span class="pull-right logout">
+			<a href="/users/sign_out">Logout</a>
+		</span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="main-wrapper">
+		<div class="sidenav">
+			<ul>
+				<li><a href="/users">Users</a></li>
+				<li><a href="/destinations">Destinations</a></li>
+				<li><a href="/pois">POI</a></li>
+				<li><a href="/trips">Trips</a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+			<div ng-controller="tripController" ng-cloak>
+				<div class="userForm">
+					<div class="md-content">
+						<ul class="form-ul">
+							<li>
+								<label>Name</label>
+								<input type="text" class="formControl" ng-model="trip.name" bs-options="user for user in users" bs-typeahead auto-select="1">
+							</li>
+							<li>
+								<label>No. of Days</label>
+								<input type="number" class="formControl" ng-model="trip.day_count">
+							</li>
+							<li>
+								<label>Trip starting date</label>
+								<input type="text" ng-model="trip.starting_date" bs-datepicker class="formControl">
+							</li>
+							<li>
+								<label>Trip ending date</label>
+								<input type="text" ng-model="trip.ending_date" bs-datepicker class="formControl">
+							</li>
+							<li>
+								<label>No.of Passengers</label>
+								<input type="number" class="formControl" ng-model="trip.pax_count">
+							</li>
+							<li>
+								<label>Amount</label>
+								<input type="number" class="formControl" ng-model="trip.amount">
+							</li>
+							<li>
+								<label>Starting place</label>
+								<input type="text" ng-model="trip.starting_place" class="formControl" bs-options="city for city in cities" bs-typeahead auto-select="1">
+							</li>
+							<li>
+								<label>Ending place</label>
+								<input type="text" ng-model="trip.ending_place" class="formControl" bs-options="city for city in cities" bs-typeahead auto-select="1">
+							</li>
+						</ul>
+						<div>
+							<div class="trip-details">
+								<label>Trip iternary</label>
+								<ul ng-repeat="itenary in itenaries track by $index">
+									<li>
+										<input type="text" class="formControl" name="city" ng-model="itenaries[$index].city" placeholder="Enter the city" bs-options="city for city in cities" bs-typeahead auto-select="1" ng-blur="getPOI($index)">
+									</li>
+									<li class="multi-select">
+										<select multi-select multiple name="poi" ng-model="itenaries[$index].poi" data-placeholder="Select poi">
+											<option ng-value="poi.name" ng-repeat="poi in pois[$index] track by $index">{{poi.name}}</option>
+										</select>
+									</li>
+									<li>
+										<input type="number" class="formControl" name="day" ng-model="itenaries[$index].day" placeholder="No. of days">
+									</li>
+									<li>
+										<i class="fa fa-plus-circle" ng-click="addItenary()"></i>
+										<i class="fa fa-minus-circle" ng-hide="itenaries.length == 1" ng-click="removeItenary($index)"></i>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="text-right">
+							<md-button class="md-raised md-primary" ng-click="saveTrip()">Save</md-button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var json = <%= @json.to_json.html_safe %>
+	console.log(json)
+</script>

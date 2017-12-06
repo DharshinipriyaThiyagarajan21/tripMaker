@@ -1,0 +1,167 @@
+.text-right {
+	text-align: right !important;
+}
+.text-center {
+	text-align: center !important;
+}
+.text-left {
+	text-align: left !important;
+}
+a {
+	text-decoration: none;
+}
+.main-wrapper {
+	background: #f9f9f9;
+}
+.sidenav {
+	width: 200px;
+	position: absolute;
+	border-right: 1px solid #eee;
+	height: calc(100vh - 60px);
+}
+.sidenav ul {
+	list-style: circle;
+}
+.sidenav ul li {
+	padding: 10px;
+}
+.sidenav ul li a {
+	text-decoration: none;
+	color: #000;
+}
+.main-content {
+	width: calc(100% - 200px);
+	margin-left: 200px;
+	height: calc(100vh - 60px);
+}
+.header {
+	height: 60px;
+	background: #2b3146;
+	color: #fff;
+}
+.header span a,
+.header span a:hover,
+.header span a:focus{
+	padding: 15px;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+.header .logout a {
+	color: #fff;
+	font-size: 16px;
+}
+.userForm {
+	padding: 20px;
+}
+.userForm .md-content {
+	background: #fff;
+	padding: 20px;
+	margin: 20px;
+}
+.form-ul{
+	list-style: none;
+}
+.form-ul li {
+	display: inline-block;
+	width: 45%;
+	margin-bottom: 20px;
+}
+.form-ul li label {
+	padding: 10px;
+	width: 20%;
+	margin: auto;
+	display: inline-block;
+	color: #999;
+}
+.form-ul .formControl {
+	width: 70%;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	height: 32px;
+	padding: 0px 10px;
+}
+.form-ul input[type="file"]{
+	display: inline-block;
+}
+.textarea {
+	width: 70%;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	padding: 0px 10px;
+}
+.addNew{
+	color: #333;
+}
+.typehead{
+	padding-left: 0;
+}
+.dropdown-menu li {
+	width: 100% !important;
+	display: block !important;
+	margin-bottom: 0;
+}
+.error-section {
+	padding: 0 20px;
+}
+.userForm .md-icon-button + .md-datepicker-input-container {
+	margin-left: 0px;
+}
+.trip-details ul{
+	list-style: none;
+	padding-left: 10px;
+}
+.trip-details ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
+.trip-details {
+	padding-left: 40px;
+}
+.trip-details label {
+	color: #999;
+	padding: 10px;
+}
+.trip-details .formControl {
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	height: 32px;
+	padding: 0px 10px;
+}
+.multi-select .select2-container {
+	width: fit-content !important;
+}
+.multi-select .select2-container--default .select2-selection--multiple,
+.multi-select .select2-container--default.select2-container--focus .select2-selection--multiple {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	min-width: 200px;
+}
+.table-section {
+	padding: 40px 10px 10px;
+}
+.table-section table {
+	width: 100%;
+}
+.table-section thead tr {
+	background: #f0f8ff;
+}
+.table-section thead th,
+.table-section tbody td {
+	padding: 10px 5px;
+}
+.table-section tbody tr:nth-child(odd) {
+	background: #fff;
+}
+.table-section tbody tr:nth-child(even) {
+	background: #f9f9f9;
+}
+.table-section tbody td img{
+	width: 50px;
+	height: 50px;
+}
+.border {
+	border: 1px solid #f9f9f9;
+}
